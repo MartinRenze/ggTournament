@@ -1,0 +1,22 @@
+<p>add-match works!</p>
+
+<form #login="ngForm" (ngSubmit)="onClickSubmit(login)" >
+  <input type="hidden" name="tournamentId" [ngModel]="tournamentId" ngModel>
+  <input type="text" name="name" placeholder="name" ngModel>
+  <br/>
+  <input type="text" name="beschreibung" placeholder="beschreibung" ngModel>
+  <br/>
+  <dl-date-time-picker
+    startView="day"
+    maxView="year"
+    minView="minute"
+    minuteStep="5"
+    name="startDateTime" ngModel>
+  </dl-date-time-picker>
+  <br/>
+  <input type="text" name="spieler1" placeholder="Spieler 1" ngModel>
+  <br>
+  <input type="text" name="spieler2" placeholder="Spieler 2" ngModel>
+  <br>
+  <input type="submit" value="submit">
+</form>

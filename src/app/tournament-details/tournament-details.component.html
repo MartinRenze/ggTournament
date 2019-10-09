@@ -1,0 +1,276 @@
+<p>Turnier: {{id}}</p>
+
+<mat-tab-group>
+  <mat-tab label="Übersicht">Die Übersicht muss noch implementiert werden</mat-tab>
+  <mat-tab label="Nächste Spiele">
+    <h3>Heute</h3>
+    <p *ngIf="(matchesToday | async)?.length==0">Heute finden keine Spiele statt</p>
+    <mat-card class="match" *ngFor="let match of matchesToday | async">
+      <mat-card-header>
+        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Startzeit: {{match?.startDateTime}}</p>
+                <mat-grid-list cols="3" rowHeight="3em">
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler1 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler2 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 1
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 2
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 3
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler2}}
+          </mat-grid-tile>
+        </mat-grid-list>
+        <h3>Zuschauen</h3>
+        <ul>
+          <li><a href="{{(match.spieler1 | convertToIngameName| async)?.friendLink}}">{{(match.spieler1 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler1 | convertToIngameName| async)?.friendLink}}</li>
+          <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
+        </ul>
+        <h3>Banns</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+        <h3>Clans</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <h3>Morgen</h3>
+      <p *ngIf="(matchesTomorrow | async)?.length==0">Morgen finden keine Spiele statt</p>
+      <mat-card class="match" *ngFor="let match of matchesTomorrow | async">
+      <mat-card-header>
+        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Startzeit: {{match?.startDateTime}}</p>
+                <mat-grid-list cols="3" rowHeight="3em">
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler1 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler2 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 1
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 2
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 3
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler2}}
+          </mat-grid-tile>
+        </mat-grid-list>
+        <h3>Zuschauen</h3>
+        <ul>
+          <li><a href="{{(match.spieler1 | convertToIngameName| async)?.friendLink}}">{{(match.spieler1 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler1 | convertToIngameName| async)?.friendLink}}</li>
+          <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
+        </ul>
+        <h3>Banns</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+        <h3>Clans</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+      </mat-card-actions>
+    </mat-card>
+    <h3>Weitere</h3>
+    <p *ngIf="(matchesRest | async)?.length==0">Es  finden keine weiteren Spiele statt</p>
+    <mat-card class="match" *ngFor="let match of matchesRest | async">
+      <mat-card-header>
+        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Startzeit: {{match?.startDateTime}}</p>
+                <mat-grid-list cols="3" rowHeight="3em">
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler1 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{(match.spieler2 | convertToIngameName| async)?.ingameName | json }}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 1
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel1Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 2
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel2Spieler2}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            Spiel 3
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler1}}
+          </mat-grid-tile>
+          <mat-grid-tile
+              [colspan]="1"
+              [rowspan]="1">
+            {{match?.spiel3Spieler2}}
+          </mat-grid-tile>
+        </mat-grid-list>
+        <h3>Zuschauen</h3>
+        <ul>
+          <li><a href="{{(match.spieler1 | convertToIngameName| async)?.friendLink}}">{{(match.spieler1 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler1 | convertToIngameName| async)?.friendLink}}</li>
+          <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
+           - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
+        </ul>
+        <h3>Banns</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+        <h3>Clans</h3>
+        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
+        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Details">Details müssen noch implementiert werden</mat-tab>
+</mat-tab-group>
