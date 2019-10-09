@@ -1,2 +1,1 @@
-# ggTournament
-Tournament organizing platform
+
