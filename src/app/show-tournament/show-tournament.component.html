@@ -1,0 +1,23 @@
+<h1>Aktuelle Turniere</h1>
+<div *ngIf="tournaments">
+  <mat-card class="tournament" *ngFor="let tournament of tournaments | async">
+      <mat-card-header>
+    <mat-card-title>{{tournament?.name}}</mat-card-title>
+    <mat-card-subtitle>{{tournament?.beschreibung}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Startzeit: {{tournament?.startTime}}</p>
+    <h3>Teilnehmer</h3>
+    <ul>
+        <li *ngFor="let members of tournament.members">{{ (members | convertToIngameName | async)?.ingameName}}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="TournamentDetails(tournament.id)" class="basic-btn btn">Details</button>
+
+    <button mat-raised-button color="primary" class="basic-btn btn" tooltip="Account erstellen und einloggen um die Funktion zu nutzen!" placement="top" show-delay="100" [display]="!(authenticationService.userData | async)" (click)="signIntoTournament(tournament.id)" [disabled]="!(authenticationService.userData | async)">
+        Anmelden
+    </button>
+  </mat-card-actions>
+  </mat-card>
+</div>

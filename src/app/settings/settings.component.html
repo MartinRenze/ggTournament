@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="form-container">
+    <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
+      <label for="ingameName">Ingame Name</label>
+      <br>
+      <input class="txt" type = "text"
+            name = "ingameName"
+            placeholder="Ingame Name"
+            formControlName="ingameName"
+            #ingameName>
+      <br>
+      <hr>
+      <p>Du bist im Clan</p>
+       <div>
+          <input ng-model="clan" id="clan1" type="radio" value="clan1" name="clan" formControlName="clan">
+          <label for="clan1">Gold's GYM</label>
+       </div>
+
+       <div>
+          <input ng-model="clan" id="clan2" type="radio" value="clan2" name="clan" formControlName="clan">
+          <label for="clan2">Gold's GYM 2</label>
+       </div>
+
+        <div>
+          <input ng-model="clan" id="clan3" type="radio" value="clan3" name="clan" formControlName="clan">
+          <label for="clan3">Gold's GYM 3</label>
+       </div>
+       <hr>
+      <label for="friendLink">Freundschafts Link</label>
+      <br>
+       <input class="txt" type = "text"
+            name = "friendLink"
+            placeholder = "Freundschafts Link"
+            formControlName="friendLink"
+            #friendLink>
+      <br>
+      <br>
+      <button class="basic-btn" type="submit">Speichern</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<p>my-matches works!</p>
+<ul *ngIf="matches">
+  <li class="text" *ngFor="let match of matches | async">
+    <pre> {{match | json }} </pre>
+            <pre> {{match.spieler1 | convertToIngameName| async | json }} </pre>
+        <pre> {{match.spieler2 | convertToIngameName| async | json }} </pre>
+        <button (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" style="margin-left: 10px">Details</button>
+  </li>
+</ul>
+<p *ngIf="!matches">Einloggen um deine Kämpfe zu sehen</p>

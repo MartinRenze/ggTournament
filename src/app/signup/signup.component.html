@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <div class="form-container">
+      <a routerLink="/login" id="goback">Zurück</a>
+
+      <h2>Jetzt mitmachen</h2>
+
+      <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+
+      <form #formData='ngForm' (ngSubmit)="SignUp()">
+
+        <input type="text" placeholder="Email Adresse.." [(ngModel)]="email" name="email" class="txt" required>
+        <input type="password" placeholder="Passwort" [(ngModel)]="password" name="password" class="txt" required>
+
+
+        <button type="submit" class="basic-btn">Meinen Account erstellen</button>
+      </form>
+    </div>
+</div>

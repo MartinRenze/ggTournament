@@ -1,0 +1,7 @@
+<p>Dashboard is still under construction. Check out the other functions!</p>
+
+<ul *ngIf="items">
+  <li class="text" *ngFor="let item of items | async">
+    <pre> {{item | json }} </pre>
+  </li>
+</ul>
