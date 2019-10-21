@@ -10,6 +10,8 @@ import { AuthenticationService } from '../shared/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+  error: any;
+
   constructor(private router: Router, public authenticationService: AuthenticationService) {}
 
 

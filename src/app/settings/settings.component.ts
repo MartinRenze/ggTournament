@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Observable } from 'rxjs';
+import { crUrlValidator } from "../validators/custom.validators";
 
 @Component({
   selector: 'app-settings',
@@ -29,8 +30,8 @@ export class SettingsComponent implements OnInit {
   createFormBlank() {
       this.angForm = this.fb.group({
       clan: [''],
-      ingameName: [''],
-      friendLink: [''],
+      ingameName: ['', [Validators.required]],
+      friendLink: ['', [crUrlValidator]]
     });
   }
 
@@ -38,11 +39,13 @@ export class SettingsComponent implements OnInit {
     this.subscription = this.db.collection('users').doc(email).valueChanges().subscribe(val => {
       this.angForm = this.fb.group({
         clan: [(val as any).clan],
-        ingameName: [(val as any).ingameName],
-        friendLink: [(val as any).friendLink],
+        ingameName: [(val as any).ingameName,[Validators.required]],
+        friendLink: [(val as any).friendLink, [crUrlValidator]]
       });
     });
   }
+
+  get f() { return this.angForm.controls; }
 
   onSubmit() {
     this.isSubmitted = true;

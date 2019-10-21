@@ -62,6 +62,14 @@ export class MyMatchesComponent implements OnInit {
 
    }
 
+   goToFindStartTimePage(id, tournamentId) {
+    this.router.navigate(['tournaments/' + tournamentId + '/matches/' + id + '/findStartTime']);
+   }
+
+   goToBannPage(id, tournamentId) {
+    this.router.navigate(['tournaments/' + tournamentId + '/matches/' + id + '/doBann']);
+   }
+
   orQuery(myMail, tournamentId){
     const $player1 = this.db.collection('tournaments')
     .doc(tournamentId).collection('matches', ref => ref.where('spieler1', '==', myMail))

@@ -1,0 +1,27 @@
+.time-box {
+    border: 1px solid;
+    margin: 1em 0;
+    display: grid;
+    grid-template-columns: 12;
+    grid-template-rows: 1;
+
+    .time-box-left {
+        padding: 1em;
+        grid-column-start: 1;
+        grid-column-end: 10;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .time-box-right {
+        grid-column-start: 10;
+        grid-column-end: 12;
+
+        button {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

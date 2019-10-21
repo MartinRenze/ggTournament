@@ -7,11 +7,11 @@
     <p *ngIf="(matchesToday | async)?.length==0">Heute finden keine Spiele statt</p>
     <mat-card class="match" *ngFor="let match of matchesToday | async">
       <mat-card-header>
-        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-title>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} vs {{(match.spieler2 | convertToIngameName| async)?.ingameName}}</mat-card-title>
         <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>Startzeit: {{match?.startDateTime}}</p>
+        <p>Startzeit: {{match?.startDateTime.seconds * 1000 | date:'short':undefined:'de-DE'}}</p>
                 <mat-grid-list cols="3" rowHeight="3em">
           <mat-grid-tile
               [colspan]="1"
@@ -81,15 +81,17 @@
           <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
            - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
         </ul>
+        <div *ngIf="match?.showBanns">
         <h3>Banns</h3>
-        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
-        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+          <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann.name_de}} gebannt</p>
+          <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann.name_de}} gebannt</p>
+        </div>
         <h3>Clans</h3>
         <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
         <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)">Details</button>
       </mat-card-actions>
     </mat-card>
 
@@ -97,11 +99,11 @@
       <p *ngIf="(matchesTomorrow | async)?.length==0">Morgen finden keine Spiele statt</p>
       <mat-card class="match" *ngFor="let match of matchesTomorrow | async">
       <mat-card-header>
-        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-title>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} vs {{(match.spieler2 | convertToIngameName| async)?.ingameName}}</mat-card-title>
         <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>Startzeit: {{match?.startDateTime}}</p>
+        <p>Startzeit: {{match?.startDateTime.seconds * 1000 | date:'short':undefined:'de-DE'}}</p>
                 <mat-grid-list cols="3" rowHeight="3em">
           <mat-grid-tile
               [colspan]="1"
@@ -171,26 +173,28 @@
           <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
            - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
         </ul>
+        <div *ngIf="match?.showBanns">
         <h3>Banns</h3>
-        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
-        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+          <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann.name_de}} gebannt</p>
+          <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann.name_de}} gebannt</p>
+        </div>
         <h3>Clans</h3>
         <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
         <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)">Details</button>
       </mat-card-actions>
     </mat-card>
     <h3>Weitere</h3>
     <p *ngIf="(matchesRest | async)?.length==0">Es  finden keine weiteren Spiele statt</p>
     <mat-card class="match" *ngFor="let match of matchesRest | async">
       <mat-card-header>
-        <mat-card-title>{{match?.name}}</mat-card-title>
+        <mat-card-title>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} vs {{(match.spieler2 | convertToIngameName| async)?.ingameName}}</mat-card-title>
         <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>Startzeit: {{match?.startDateTime}}</p>
+        <p>Startzeit: {{match?.startDateTime.seconds * 1000 | date:'short':undefined:'de-DE'}}</p>
                 <mat-grid-list cols="3" rowHeight="3em">
           <mat-grid-tile
               [colspan]="1"
@@ -260,17 +264,37 @@
           <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
            - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
         </ul>
+        <div *ngIf="match?.showBanns">
         <h3>Banns</h3>
-        <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann}} gebannt</p>
-        <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann}} gebannt</p>
+          <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann.name_de}} gebannt</p>
+          <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann.name_de}} gebannt</p>
+        </div>
         <h3>Clans</h3>
         <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
         <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+        <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)">Details</button>
       </mat-card-actions>
     </mat-card>
   </mat-tab>
-  <mat-tab label="Details">Details müssen noch implementiert werden</mat-tab>
+  <mat-tab label="Details">
+        <mat-card class="tournament">
+      <mat-card-header>
+        <mat-card-title>{{(tournament | async)?.name}}</mat-card-title>
+        <mat-card-subtitle>{{(tournament | async)?.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Startzeit: {{(tournament | async)?.startTime}}</p>
+        <p>Preisgeld: {{(tournament | async)?.preisgeld}}</p>
+        <p>Spielanzahl Vorrunde: {{(tournament | async)?.spielanzahlVorrunde}}</p>
+        <p>Spielanzahl Halbfinale: {{(tournament | async)?.spielanzahlHalbfinale}}</p>
+        <p>Spielanzahl Finale: {{(tournament | async)?.spielanzahlFinale}}</p>
+        <p>Spielzeit: {{(tournament | async)?.spielzeit}}</p>
+        <p>Beispiel: {{(tournament | async)?.beispiel}}</p>
+        <p>Bekanntgabe des Spielplans: {{(tournament | async)?.bekanntgabeSpielplan}}</p>
+        <p>Zeit um Karten zu Bannen: {{(tournament | async)?.zeitUmKartenZuBannen}}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
 </mat-tab-group>

@@ -23,11 +23,11 @@ export class MatchComponent implements OnInit {
   owlStartDateTime: any;
   matchSubscription: any;
 
-  constructor(public fb: FormBuilder
-              , private route: ActivatedRoute
-              , private router: Router
-              , private firestore: AngularFirestore
-              , private authenticationService: AuthenticationService) {
+  constructor(public fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private firestore: AngularFirestore,
+              private authenticationService: AuthenticationService) {
     this.id = this.route.snapshot.params['matchId'];
     this.tournamentId = this.route.snapshot.params['id'];
     this.match = this.firestore.collection('tournaments')
@@ -56,13 +56,7 @@ export class MatchComponent implements OnInit {
   updateForm()
   {
     this.matchForm = this.fb.group({
-        name: [this.formVal.name],
-        beschreibung: [this.formVal.beschreibung],
         startDateTime: [this.formVal.startDateTime],
-        spieler1: [this.formVal.spieler1],
-        spieler2: [this.formVal.spieler2],
-        spieler1Bann: [this.formVal.spieler1Bann],
-        spieler2Bann: [this.formVal.spieler2Bann],
         spiel1Spieler1: [this.formVal.spiel1Spieler1],
         spiel2Spieler1: [this.formVal.spiel2Spieler1],
         spiel3Spieler1: [this.formVal.spiel3Spieler1],
@@ -75,13 +69,7 @@ export class MatchComponent implements OnInit {
   updateFormClean()
   {
     this.matchForm = this.fb.group({
-        name: [''],
-        beschreibung: [''],
         startDateTime: new FormControl(),
-        spieler1: [''],
-        spieler2: [''],
-        spieler1Bann: [''],
-        spieler2Bann: [''],
         spiel1Spieler1: [''],
         spiel2Spieler1: [''],
         spiel3Spieler1: [''],
@@ -107,6 +95,10 @@ export class MatchComponent implements OnInit {
         {
             return false;
         }
+  }
+
+  goToBannPage() {
+    this.router.navigate(['tournaments/' + this.tournamentId + '/matches/' + this.id + '/doBann']);
   }
 
   onClickSubmit(formData) {

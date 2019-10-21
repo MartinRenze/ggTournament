@@ -17,6 +17,7 @@ export class TournamentDetailsComponent implements OnInit {
   matchesToday: Observable<any[]>;
   matchesTomorrow: Observable<any[]>;
   matchesRest: Observable<any[]>;
+  tournament: Observable<any[]>;
 
   constructor(private route: ActivatedRoute, private router: Router, db: AngularFirestore) {
     this.db = db;
@@ -24,6 +25,7 @@ export class TournamentDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.tournament = this.db.collection('tournaments').doc(this.id).valueChanges() as Observable<any[]>;
 
     var todayStart = new Date();
     todayStart.setHours(0,0,-5,0);

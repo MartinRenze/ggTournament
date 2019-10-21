@@ -27,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatchComponent } from './match/match.component';
 import { AddMatchComponent } from './add-match/add-match.component';
-import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+//import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { MyMatchesComponent } from './my-matches/my-matches.component';
 import { UpdateMatchComponent } from './update-match/update-match.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
@@ -39,6 +39,11 @@ import { MatIconModule } from '@angular/material';
 import { LoginEmailComponent } from './login-email/login-email.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule, MatToolbarModule} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxTypeaheadModule } from 'ngx-typeahead';
+import { DoBannComponent } from './do-bann/do-bann.component';
+import { FindStartTimeComponent } from './find-start-time/find-start-time.component';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -60,6 +65,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     UpdateMatchComponent,
     ConvertToIngameNamePipe,
     LoginEmailComponent,
+    DoBannComponent,
+    FindStartTimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,15 +79,19 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     TooltipModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    DlDateTimeDateModule,
-    DlDateTimePickerModule,
+    //DlDateTimeDateModule,
+    //DlDateTimePickerModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    MatGridListModule
+    MatGridListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    FlexLayoutModule,
+    NgxTypeaheadModule
   ],
   providers: [
     AuthenticationService,

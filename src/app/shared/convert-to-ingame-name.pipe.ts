@@ -8,6 +8,9 @@ export class ConvertToIngameNamePipe implements PipeTransform {
     constructor(private db: AngularFirestore) { }
 
     transform(value: any) {
-        return this.db.collection('users').doc(value).valueChanges();
+        if(value == null)
+            return null;
+        else
+            return this.db.collection('users').doc(value).valueChanges();
     }
 }

@@ -3,7 +3,7 @@
         <a routerLink="/login" id="goback">Zurück</a>
         <h2>eMail Login</h2>
 
-        <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+        <span class="error" *ngIf="authenticationService.loginError">{{ authenticationService.loginError }}</span>
 
         <form #formData='ngForm' (ngSubmit)="SignIn()">
 

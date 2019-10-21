@@ -58,18 +58,3 @@ h2 {
 #goback span {
     font-size:1em;
 }
-
-@media (max-width: 600px) {
-    body {
-        padding-top:1.2em;
-    }
-
-    .form-container {
-        padding:1.2em;
-        width:90%;
-        margin-left:-45%;
-    }
-    button {
-        font-size:1em;
-    }
-}

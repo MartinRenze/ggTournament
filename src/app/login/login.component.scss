@@ -87,22 +87,6 @@ h2 {
   }
 }
 
-
-@media (max-width: 600px) {
-    body {
-        padding-top:1.2em;
-    }
-
-    .form-container {
-        padding:1.2em;
-        width:90%;
-        margin-left:-45%;
-    }
-    button {
-        font-size:1em;
-    }
-}
-
 #lock {
     width:40%;
     margin: 1.5em auto 4em auto;
@@ -124,25 +108,4 @@ h2 {
 #email {
     background: #ECECEC  url('../../assets/images/email.svg') no-repeat 25px;
     background-size: 25px;
-}
-
-@media (max-width: 600px) {
-    #page {
-        padding:1em;
-    }
-    #toolbar {
-        width:90%;
-        margin-left: -45%;
-    }
-    #fb {
-        background:#3B5998;
-    }
-
-    #google {
-        background: #fff;
-    }
-
-    #email {
-        background: #ECECEC;
-    }
 }

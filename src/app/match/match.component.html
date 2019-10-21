@@ -1,36 +1,61 @@
-<p>match works! {{id}} {{tournamentId}}</p>
+<p>Match Id: {{id}}</p>
+<p>Turnier Id: {{tournamentId}}</p>
 
 <form #updateMatch="ngForm" [formGroup]="matchForm"  (ngSubmit)="onClickSubmit(updateMatch)" >
-  <input type="text" name="name" placeholder="name" formControlName="name">
-  <br/>
-  <input type="text" name="beschreibung" placeholder="beschreibung" formControlName="beschreibung">
-  <br/>
 
-    <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="{{owlStartDateTime?.toDate() | date:'medium':'de-DE'}}" formControlName="startDateTime">
-    <owl-date-time firstDayOfWeek="1" #dt1></owl-date-time>
 
-  <br/>
-  <input type="text" name="spieler1" placeholder="Spieler 1" formControlName="spieler1">
-  <br>
-    <input type="number" name="spiel1Spieler1" placeholder="0" formControlName="spiel1Spieler1">
-  <br>
-    <input type="number" name="spiel2Spieler1" placeholder="0" formControlName="spiel2Spieler1">
-  <br>
-    <input type="number" name="spiel3Spieler1" placeholder="0" formControlName="spiel3Spieler1">
-  <br>
-    <input type="text" name="spieler1Bann" placeholder="" formControlName="spieler1Bann">
-  <br>
-  <input type="text" name="spieler2" placeholder="Spieler 2" formControlName="spieler2">
-<br>
-      <input type="number" name="spiel1Spieler2" placeholder="0" formControlName="spiel1Spieler2">
-  <br>
-    <input type="number" name="spiel2Spieler2" placeholder="0" formControlName="spiel2Spieler2">
-  <br>
-    <input type="number" name="spiel3Spieler2" placeholder="0" formControlName="spiel3Spieler2">
-    <br>
-        <input type="text" name="spieler2Bann" placeholder="" formControlName="spieler2Bann">
-  <br>
-  <br>
-  <br>
-  <input *ngIf="userIsPlayer()" type="submit" value="submit">
+<mat-card class="match">
+      <mat-card-header>
+        <mat-card-title>{{((match | async)?.spieler1 | convertToIngameName| async)?.ingameName}} vs {{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}}</mat-card-title>
+        <mat-card-subtitle>{{(match | async)?.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div><span>Startzeit</span>
+        <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="{{owlStartDateTime?.toDate() | date:'medium':undefined:'de-DE'}}" formControlName="startDateTime">
+        <owl-date-time firstDayOfWeek="1" #dt1></owl-date-time>
+        </div>
+        <div class="grid-container">
+          <!--<label>Spieler 1</label>
+          <input type="text" name="spieler1" placeholder="Spieler 1" formControlName="spieler1">
+          <label>Spieler 2</label>
+          <input type="text" name="spieler2" placeholder="Spieler 2" formControlName="spieler2">-->
+          <label>{{((match | async)?.spieler1 | convertToIngameName| async)?.ingameName}}, Spiel 1</label>
+          <input type="number" name="spiel1Spieler1" placeholder="0" formControlName="spiel1Spieler1">
+          <label>{{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}}, Spiel 1</label>
+          <input type="number" name="spiel1Spieler2" placeholder="0" formControlName="spiel1Spieler2">
+          <label>{{((match | async)?.spieler1 | convertToIngameName| async)?.ingameName}}, Spiel 2</label>
+          <input type="number" name="spiel2Spieler1" placeholder="0" formControlName="spiel2Spieler1">
+          <label>{{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}}, Spiel 2</label>
+          <input type="number" name="spiel2Spieler2" placeholder="0" formControlName="spiel2Spieler2">
+          <label>{{((match | async)?.spieler1 | convertToIngameName| async)?.ingameName}}, Spiel 3</label>
+          <input type="number" name="spiel3Spieler1" placeholder="0" formControlName="spiel3Spieler1">
+          <label>{{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}}, Spiel 3</label>
+          <input type="number" name="spiel3Spieler2" placeholder="0" formControlName="spiel3Spieler2">
+        </div>
+
+        <h3>Zuschauen</h3>
+        <ul>
+          <li><a href="{{(((match | async)?.spieler1) | convertToIngameName | async)?.friendLink}}">{{(((match | async)?.spieler1) | convertToIngameName| async)?.ingameName}}</a>
+           - {{(((match | async)?.spieler1) | convertToIngameName| async)?.friendLink}}</li>
+          <li><a href="{{((match | async)?.spieler2 | convertToIngameName | async)?.friendLink}}">{{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}}</a>
+           - {{((match | async)?.spieler2 | convertToIngameName| async)?.friendLink}}</li>
+        </ul>
+
+        <div *ngIf="match | async as matchLoaded">
+          <ng-template [ngIf]="matchLoaded?.showBanns">
+            <h3>Banns</h3>
+            <p>{{(matchLoaded?.spieler1 | convertToIngameName| async)?.ingameName}} hat {{matchLoaded?.spieler1Bann?.name_de}} gebannt</p>
+            <p>{{(matchLoaded?.spieler2 | convertToIngameName| async)?.ingameName}} hat {{matchLoaded?.spieler2Bann?.name_de}} gebannt</p>
+          </ng-template>
+        </div>
+
+        <h3>Clans</h3>
+        <p>{{((match | async)?.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{((match | async)?.spieler1 | convertToIngameName| async)?.clan}}</p>
+        <p>{{((match | async)?.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{((match | async)?.spieler2 | convertToIngameName| async)?.clan}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" *ngIf="userIsPlayer()" type="submit" value="Bestätigen">Bestätigen</button>
+        <button mat-raised-button color="primary" *ngIf="userIsPlayer()" (click)="goToBannPage()">Bannen</button>
+      </mat-card-actions>
+    </mat-card>
 </form>

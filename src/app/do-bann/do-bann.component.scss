@@ -26,20 +26,6 @@
 .typeahead-wrap .list-group-item .item-name {
     font-weight: bold;
 }
-
-.grid-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 2em;
-    grid-gap: 1em;
-    align-items: center;
-    margin: 1em 0;
-
-    label {
-        margin-bottom: 0;
-    }
-}
-
 .bann-dropdown {
     text-align: left;
 }

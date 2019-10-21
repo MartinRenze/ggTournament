@@ -14,6 +14,8 @@ import { TournamentDetailsComponent } from './tournament-details/tournament-deta
 import { MatchComponent } from './match/match.component';
 import { AddMatchComponent } from './add-match/add-match.component';
 import { MyMatchesComponent } from './my-matches/my-matches.component';
+import { DoBannComponent } from './do-bann/do-bann.component';
+import { FindStartTimeComponent } from './find-start-time/find-start-time.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
     { path: 'settings', component: SettingsComponent},
     { path: 'tournaments/:id', component: TournamentDetailsComponent },
     { path: 'tournaments/:id/matches/:matchId', component: MatchComponent },
+    { path: 'tournaments/:id/matches/:matchId/doBann', component: DoBannComponent },
+    { path: 'tournaments/:id/matches/:matchId/findStartTime', component: FindStartTimeComponent },
     { path: 'tournaments/:id/add-match', component: AddMatchComponent },
     { path: 'my-matches', component: MyMatchesComponent },
 ];

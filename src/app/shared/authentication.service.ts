@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  userData: Observable<firebase.User>;
+  public userData: Observable<firebase.User>;
+  public loginError: any;
 
-  constructor(private angularFireAuth: AngularFireAuth) {
+  constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
     this.userData = angularFireAuth.authState;
   }
 
@@ -34,7 +36,11 @@ export class AuthenticationService {
     }
 
   OAuthProvider(provider) {
-      return this.angularFireAuth.auth.signInWithPopup(provider);
+      return this.angularFireAuth.auth.signInWithPopup(provider).then((res) => {
+        this.router.navigate(['']);
+      }).catch((error) => {
+        window.alert(error);
+      });
   }
 
   SigninWithGoogle() {
@@ -42,7 +48,18 @@ export class AuthenticationService {
         .then(res => {
             console.log('Successfully logged in!')
         }).catch(error => {
-            console.log(error)
+            console.log(error);
+            this.loginError = error;
+        });
+  }
+
+  SigninWithGoogleAlternative() {
+    return this.OAuthProvider(new auth.GoogleAuthProvider())
+        .then(res => {
+            console.log('Successfully logged in!')
+        }).catch(error => {
+            console.log(error);
+            this.loginError = error;
         });
   }
 
@@ -52,6 +69,7 @@ export class AuthenticationService {
             console.log('Successfully logged in!')
         }).catch(error => {
             console.log(error)
+            this.loginError = error;
         });
   }
 
@@ -63,9 +81,11 @@ export class AuthenticationService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed up!', res);
+        this.router.navigate(['']);
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);
+        this.loginError = error.message;
       });
   }
 
@@ -76,9 +96,11 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed in!');
+        this.router.navigate(['']);
       })
       .catch(err => {
         console.log('Something is wrong:',err.message);
+        this.loginError = err.message;
       });
   }
 
@@ -87,5 +109,6 @@ export class AuthenticationService {
     this.angularFireAuth
       .auth
       .signOut();
+    this.router.navigate(['']);
   }
 }

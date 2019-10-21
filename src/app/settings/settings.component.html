@@ -9,6 +9,10 @@
             formControlName="ingameName"
             #ingameName>
       <br>
+      <!-- error block -->
+          <div *ngIf="f.ingameName.errors?.required">
+            <sup>*</sup>Pflichtfeld
+          </div>
       <hr>
       <p>Du bist im Clan</p>
        <div>
@@ -34,6 +38,10 @@
             formControlName="friendLink"
             #friendLink>
       <br>
+       <!-- error block -->
+          <div *ngIf="f.friendLink.errors?.urlValid">
+            <sup>*</sup>URL im Format https://link.clashroyale.com/invite/friend/de?tag=2LJCJRJC&token=7zrrm2ht&platform=android
+          </div>
       <br>
       <button class="basic-btn" type="submit">Speichern</button>
     </form>

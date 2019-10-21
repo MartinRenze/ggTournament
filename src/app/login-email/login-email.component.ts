@@ -11,6 +11,7 @@ export class LoginEmailComponent implements OnInit {
   error: any;
   email: string = "";
   password: string = "";
+  state: any;
 
   constructor(public authenticationService: AuthenticationService) { }
 

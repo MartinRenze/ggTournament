@@ -1,10 +1,94 @@
-<p>my-matches works!</p>
-<ul *ngIf="matches">
-  <li class="text" *ngFor="let match of matches | async">
-    <pre> {{match | json }} </pre>
-            <pre> {{match.spieler1 | convertToIngameName| async | json }} </pre>
-        <pre> {{match.spieler2 | convertToIngameName| async | json }} </pre>
-        <button (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" style="margin-left: 10px">Details</button>
-  </li>
-</ul>
 <p *ngIf="!matches">Einloggen um deine Kämpfe zu sehen</p>
+
+<p *ngIf="(matches | async)?.length==0">Du hast keine bevorstehenden Kämpfe</p>
+<mat-card class="match" *ngFor="let match of matches | async">
+  <mat-card-header>
+    <mat-card-title>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} vs {{(match.spieler2 | convertToIngameName| async)?.ingameName}}</mat-card-title>
+    <mat-card-subtitle>{{match?.beschreibung}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Startzeit: {{match?.startDateTime.seconds * 1000 | date:'short':undefined:'de-DE'}}</p>
+            <mat-grid-list cols="3" rowHeight="3em">
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{(match.spieler1 | convertToIngameName| async)?.ingameName | json }}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{(match.spieler2 | convertToIngameName| async)?.ingameName | json }}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        Spiel 1
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel1Spieler1}}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel1Spieler2}}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        Spiel 2
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel2Spieler1}}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel2Spieler2}}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        Spiel 3
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel3Spieler1}}
+      </mat-grid-tile>
+      <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="1">
+        {{match?.spiel3Spieler2}}
+      </mat-grid-tile>
+    </mat-grid-list>
+    <h3>Zuschauen</h3>
+    <ul>
+      <li><a href="{{(match.spieler1 | convertToIngameName| async)?.friendLink}}">{{(match.spieler1 | convertToIngameName| async)?.ingameName}}</a>
+       - {{(match.spieler1 | convertToIngameName| async)?.friendLink}}</li>
+      <li><a href="{{(match.spieler2 | convertToIngameName| async)?.friendLink}}">{{(match.spieler2 | convertToIngameName| async)?.ingameName}}</a>
+       - {{(match.spieler2 | convertToIngameName| async)?.friendLink}}</li>
+    </ul>
+    <div *ngIf="match?.showBanns">
+    <h3>Banns</h3>
+      <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler1Bann.name_de}} gebannt</p>
+      <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} hat {{match?.spieler2Bann.name_de}} gebannt</p>
+    </div>
+    <h3>Clans</h3>
+    <p>{{(match.spieler1 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler1 | convertToIngameName| async)?.clan}}</p>
+    <p>{{(match.spieler2 | convertToIngameName| async)?.ingameName}} ist in {{(match.spieler2 | convertToIngameName| async)?.clan}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="MatchDetails(match.id, match.tournamentId)" class="btn btn-info" >Details</button>
+    <button mat-raised-button color="primary" (click)="goToBannPage(match.id, match.tournamentId)">Bannen</button>
+    <button mat-raised-button color="primary" (click)="goToFindStartTimePage(match.id, match.tournamentId)">Spielzeit festlegen</button>
+  </mat-card-actions>
+</mat-card>

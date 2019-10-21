@@ -1,0 +1,20 @@
+<h3>Bann</h3>
+
+<section class="col-sm-12 custom">
+  <div>
+      <img *ngIf="bannSpielerId" src="{{cardImageUrl}}{{bannSpielerId}}{{cardImageFileExtension}}">
+  </div>
+  <div class="search-results style-3">
+    <input type="text" [value]="bannSpieler" placeholder="Kartenname eintragen"
+      ngxTypeahead class="col-sm-12 form-control"
+      [taDisplayOnFocus]="true"
+      [taList]="cards"
+      [taItemTpl]="itemTpl"
+      (taSelected)="setBannSpieler($event)">
+  </div>
+  <ng-template #itemTpl let-result class="list-item">
+    <div class="bann-dropdown">
+      <img src="{{cardImageUrl}}{{result.result.key}}{{cardImageFileExtension}}"> <strong>{{ result.result.name_de }}</strong>
+    </div>
+  </ng-template>
+</section>

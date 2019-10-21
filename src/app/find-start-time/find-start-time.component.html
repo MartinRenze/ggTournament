@@ -1,0 +1,52 @@
+<div>
+    <h3>Wähle die Zeitintervalle in denen du kämpfen möchtest</h3>
+<div *ngIf="(match | async) as matchDoc">
+    <div *ngIf="matchDoc?.spieler1 == (authenticationService.userData | async )?.email">
+        <div *ngFor="let dateTime of matchDoc?.spieler1HasTime | keyvalue" class="time-box">
+            <div class="time-box-left">{{safeMaxId(dateTime.key)}}
+                <p>Von: {{dateTime.value.from.seconds * 1000 | date:'EEEE, MMMM d, y, H:mm':undefined:'de-DE'}}<br>
+                    Bis: {{dateTime.value.to.seconds * 1000 | date:'EEEE, MMMM d, y, H:mm':undefined:'de-DE'}}
+                </p>
+            </div>
+            <div class="time-box-right">
+                <button mat-raised-button color="primary" (click)="deleteDateTime(dateTime.key, 1)">Löschen</button>
+            </div>
+        </div>
+
+            <p>Von: <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [(ngModel)]="currentSelectedDateTime.from"
+        placeholder="">
+    <owl-date-time firstDayOfWeek="1" #dt1></owl-date-time>
+    </p>
+    <p>
+        Bis: <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" [(ngModel)]="currentSelectedDateTime.to"
+        placeholder="">
+        <owl-date-time firstDayOfWeek="1" #dt2></owl-date-time>
+    </p>
+    <button mat-raised-button color="primary" (click)="addDatetimeToArray(1)">Hinzufügen</button>
+    </div>
+
+    <div *ngIf="matchDoc?.spieler2 == (authenticationService.userData | async )?.email">
+        <div *ngFor="let dateTime of matchDoc?.spieler2HasTime | keyvalue" class="time-box">
+            <div class="time-box-left">{{safeMaxId(dateTime.key)}}
+                <p>Von: {{dateTime.value.from.seconds * 1000 | date:'EEEE, MMMM d, y, H:mm':undefined:'de-DE'}}<br>
+                    Bis: {{dateTime.value.to.seconds * 1000 | date:'EEEE, MMMM d, y, H:mm':undefined:'de-DE'}}
+                </p>
+            </div>
+            <div class="time-box-right">
+                <button mat-raised-button color="primary" (click)="deleteDateTime(dateTime.key, 2)">Löschen</button>
+            </div>
+        </div>
+
+            <p>Von: <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [(ngModel)]="currentSelectedDateTime.from"
+        placeholder="">
+    <owl-date-time firstDayOfWeek="1" #dt1></owl-date-time>
+    </p>
+    <p>
+        Bis: <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" [(ngModel)]="currentSelectedDateTime.to"
+        placeholder="">
+        <owl-date-time firstDayOfWeek="1" #dt2></owl-date-time>
+    </p>
+    <button mat-raised-button color="primary" (click)="addDatetimeToArray(2)">Hinzufügen</button>
+    </div>
+</div>
+</div>

@@ -23,53 +23,12 @@ body {
     color:white;
 }
 
-header {
-    background: $primary;
-
-    a {
-        color: white;
-        text-decoration: none;
-
-        &:hover {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        img {
-            height: 4em;
-        }
-    }
-    a.logo {
-        font-weight: bold;
-    }
-
-    nav {
-        float: right;
-
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            display: flex;
-
-            li a {
-                padding: 1em;
-                line-height: 4em;
-
-                .mat-icon {
-                  vertical-align: middle;
-                }
-
-                &:hover {
-                    background: darken($primary, 10%);
-                }
-            }
-        }
-    }
-}
-
 h1 {
     margin-top: 2em;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 html, body { height: 100%; }

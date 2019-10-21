@@ -1,23 +1,47 @@
-<header>
-  <div class="container">
-    <a href="#" class="logo"><img src="assets/images/logo.png"> GG Tournament</a>
-    <nav>
-      <ul>
-        <li><a href="#" routerLink="/">Home</a>
-        <li><a href="#" routerLink="/show-tournament">Turniere</a>
-        <li *ngIf="authenticationService.userData | async"><a href="#" routerLink="/my-matches">Meine Kämpfe</a>
-        <li *ngIf="authenticationService.userData | async"><a title="Einstellungen" href="#" routerLink="/settings"><mat-icon>settings</mat-icon></a>
-        <li *ngIf="!(authenticationService.userData | async)"><a title="Login" href="#" routerLink="/login"><mat-icon>exit_to_app</mat-icon></a>
-        <li *ngIf="authenticationService.userData | async"><a title="Logout" href="#" (click)="signOut()"><mat-icon>logout</mat-icon></a>
-      </ul>
-    </nav>
-  </div>
-</header>
+<div class="outer-wrapper">
+  <header>
+    <mat-toolbar color="primary" class="container">
+      <a href="#" class="logo"><img src="assets/images/logo.png"> GG Tournament</a>
 
-<div class="container">
-  <router-outlet></router-outlet>
+      <span class="menu-spacer"></span>
+
+      <nav class="menu-top" fxShow="true" fxHide.lt-md="true">
+        <ul>
+          <li><a href="#" routerLink="/">Home</a></li>
+          <li><a href="#" routerLink="/show-tournament">Turniere</a></li>
+          <li *ngIf="authenticationService.userData | async"><a href="#" routerLink="/my-matches">Meine Kämpfe</a></li>
+          <li *ngIf="authenticationService.userData | async"><a title="Einstellungen" href="#" routerLink="/settings"><mat-icon>settings</mat-icon></a></li>
+          <li *ngIf="!(authenticationService.userData | async)"><a title="Login" href="#" routerLink="/login"><mat-icon>exit_to_app</mat-icon></a></li>
+          <li *ngIf="authenticationService.userData | async"><a title="Logout" href="#" (click)="signOut()"><mat-icon>logout</mat-icon></a></li>
+        </ul>
+      </nav>
+
+      <div class="menu-burger" fxShow="true" fxHide.gt-sm="true">
+        <span class="clickable" (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></span>
+      </div>
+    </mat-toolbar>
+  </header>
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav fxLayout="column">
+      <nav class="menu-side" fxLayout="column">
+        <ul>
+          <li><span (click)="sidenav.toggle()"><mat-icon>close</mat-icon></span></li>
+          <li><a (click)="sidenav.toggle()" href="#" routerLink="/">Home</a></li>
+          <li><a (click)="sidenav.toggle()" href="#" routerLink="/show-tournament">Turniere</a></li>
+          <li *ngIf="authenticationService.userData | async"><a (click)="sidenav.toggle()" href="#" routerLink="/my-matches">Meine Kämpfe</a></li>
+          <li *ngIf="authenticationService.userData | async"><a (click)="sidenav.toggle()" title="Einstellungen" href="#" routerLink="/settings"><mat-icon>settings</mat-icon></a></li>
+          <li *ngIf="!(authenticationService.userData | async)"><a (click)="sidenav.toggle()" title="Login" href="#" routerLink="/login"><mat-icon>exit_to_app</mat-icon></a></li>
+          <li *ngIf="authenticationService.userData | async"><a (click)="sidenav.toggle()" title="Logout" href="#" (click)="signOut()"><mat-icon>logout</mat-icon></a></li>
+        </ul>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+      <footer>
+
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-
-<footer>
-
-</footer>

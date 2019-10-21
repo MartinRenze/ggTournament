@@ -1,0 +1,122 @@
+$primary: rgb(103, 58, 183);
+
+
+
+.outer-wrapper {
+    height: calc(100vh - 64px);
+}
+
+@media (max-width:599px) {
+    .outer-wrapper {
+        height: calc(100vh - 56px);
+    }
+}
+
+header {
+    background: $primary;
+
+
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        img {
+            height: 3em;
+        }
+    }
+    a.logo {
+        font-weight: bold;
+    }
+
+    .menu-top {
+        float: right;
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+
+            li a {
+                padding: 1em;
+                line-height: 4em;
+
+                .mat-icon {
+                  vertical-align: middle;
+                }
+
+                &:hover {
+                    background: darken($primary, 10%);
+                }
+            }
+        }
+    }
+}
+
+.mat-sidenav {
+        background: $primary;
+
+        .menu-side {
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+
+                li a {
+                    display:flex;
+                    flex-wrap: wrap;
+                    padding: 1.5em;
+                    color: white;
+                    text-decoration: none;
+
+                    .mat-icon {
+                      vertical-align: middle;
+                    }
+
+                    &:hover {
+                        background: darken($primary, 10%);
+                        color: #fff;
+                        text-decoration: none;
+                    }
+                }
+
+                li span {
+                    cursor: pointer;
+                    color: #fff;
+                    display:flex;
+                    flex-wrap: wrap;
+                    padding: 1.5em;
+
+                    .mat-icon {
+                      vertical-align: middle;
+                    }
+
+                    &:hover {
+                        background: darken($primary, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-burger
+{
+    span {
+        padding: 1em;
+        line-height: 4em;
+
+        .mat-icon {
+          vertical-align: middle;
+        }
+    }
+}
